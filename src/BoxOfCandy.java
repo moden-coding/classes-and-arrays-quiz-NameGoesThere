@@ -24,8 +24,21 @@ public class BoxOfCandy {
      *         {@code false} otherwise
      */
     public boolean moveCandyToFirstRow(int col) {
-        // TODO — write your solution here
-        return false;   // placeholder so template compiles
+        if (box[0][col] != null)
+            return true;
+
+        for (int r = 1; r < box.length; ++r)
+        {
+            if (box[r][col] == null)
+                continue;
+
+            box[0][col] = box[r][col];
+            box[r][col] = null;
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -37,8 +50,24 @@ public class BoxOfCandy {
      * @return the removed Candy, or {@code null} if no such Candy exists
      */
     public Candy removeNextByFlavor(String flavor) {
-        // TODO — write your solution here
-        return null;    // placeholder so template compiles
+        for (int r = box.length - 1; r > 0; --r)
+        {
+            for (int c = 0; c < box[0].length; ++c)
+            {
+                if (box[r][c] == null)
+                    continue;
+
+                if (box[r][c].getFlavor() == flavor)
+                {
+                    Candy returnFlavor = box[r][c];
+                    box[r][c] = null;
+
+                    return returnFlavor;
+                }
+            }
+        }
+
+        return null;
     }
 
     /* ----------------------------------------------------------------------
